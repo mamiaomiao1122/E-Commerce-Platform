@@ -20,16 +20,36 @@
       </div>
 		
 	</div>
-	<div class="content">
-		content
-	</div>
-	<div class="footer">
-		footer
-	</div>
+	
+	<div class="container">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+
+    </div>
+	<div class="app-foot">
+      <p>@ 2018 MMM</p>
+    </div>
+    <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+      <p>四川省成都市四川大学望江校区计算机学院</p>
+    </my-dialog>
+    
+    <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+      <log-form @has-log="onSuccessLog"></log-form>
+    </my-dialog>
+
+    <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+      <!-- <reg-form></reg-form> -->
+    </my-dialog>
 	</div>
 </template>>
 <script type="text/javascript">
+	import Dialog from './base/dialog'
 	export default{
+		components: {
+   			 MyDialog: Dialog
+   
+  		},
 		data(){
 			  return {
       			isShowAboutDialog: false,
@@ -47,10 +67,15 @@
 			    },
 			    regClick () {
 			      this.isShowRegDialog = true
+			    },
+			    closeDialog (attr) {
+			      this[attr] = false
+			    },
+			    onSuccessLog (data) {
+			      console.log(data)
+			      this.closeDialog ('isShowLogDialog')
+			      this.username = data.username
 			    }
-			    // closeDialog (attr) {
-			    //   this[attr] = false
-			    // }
 		}
 	}
 </script>
