@@ -2,9 +2,9 @@
 	<div>
 	<div class="app-head">
       <div class="app-head-inner">
-        <!-- <router-link :to="{path: '/'}"> -->
+        <router-link :to="{path: '/'}">
           <img src="../assets/logo.png">
-        <!-- </router-link> -->
+        </router-link>
         <div class="head-nav">
           <ul class="nav-list">
             <li> {{ username }}</li>
@@ -38,16 +38,22 @@
       <log-form @has-log="onSuccessLog"></log-form>
     </my-dialog>
 
+
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
-      <!-- <reg-form></reg-form> -->
+      <reg-form></reg-form>
     </my-dialog>
 	</div>
 </template>>
+
 <script type="text/javascript">
 	import Dialog from './base/dialog'
-	export default{
+	import LogForm from './logForm'
+  import RegForm from './regForm'
+  export default{
 		components: {
-   			 MyDialog: Dialog
+   			 MyDialog: Dialog,
+         LogForm,
+         RegForm
    
   		},
 		data(){
@@ -73,6 +79,7 @@
 			    },
 			    onSuccessLog (data) {
 			      console.log(data)
+            //alert("mmm")
 			      this.closeDialog ('isShowLogDialog')
 			      this.username = data.username
 			    }
@@ -81,10 +88,6 @@
 </script>
 
 <style>
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
