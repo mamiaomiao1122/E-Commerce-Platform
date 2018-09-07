@@ -1,10 +1,9 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-//import App from './App'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import layout from './components/layout.vue'
+import Layout from './components/layout.vue'
 import IndexPage from './pages/index'
 import DetailPage from './pages/detail'
 import OrderListPage from './pages/orderList'
@@ -16,6 +15,7 @@ import DetailPubPage from './pages/detail/publish'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(VueResource)
+
 let router = new VueRouter({
 	mode:'history',
 	routes:[
@@ -28,26 +28,26 @@ let router = new VueRouter({
 		component: OrderListPage
 	},
 	{
-			path: '/detail',
-			component: DetailPage,
-			redirect: '/detail/analysis',
-			children: [
-				{
-					path: 'analysis',
-					component: DetailAnaPage
-				},
-				{
-					path: 'count',
-					component: DetailCouPage
-				},
-				{
-					path: 'forecast',
-					component: DetailForPage
-				},
-				{
-					path: 'publish',
-					component: DetailPubPage
-				}
+		path: '/detail',
+		component: DetailPage,
+		redirect: '/detail/count',
+		children: [
+			{
+				path: 'analysis',
+				component: DetailAnaPage
+			},
+			{
+				path: 'count',
+				component: DetailCouPage
+			},
+			{
+				path: 'forecast',
+				component: DetailForPage
+			},
+			{
+				path: 'publish',
+				component: DetailPubPage
+			}
 			]
 		}
 	]
@@ -56,6 +56,6 @@ let router = new VueRouter({
 new Vue({
   el: '#app',
   router,
-  components: { layout },
-  template: '<layout/>'
+  components: { Layout },
+  template: '<Layout/>'
 })
