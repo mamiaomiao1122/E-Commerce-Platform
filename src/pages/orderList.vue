@@ -127,11 +127,11 @@ export default {
         startDate: this.startDate,
         endDate: this.endDate
       }
-      this.$http.post('/api/getOrderList', reqParams)
+      this.$http.post('/api/appData', reqParams)
       .then((res) => {
-        this.tableData = res.data.list
+        cosole.log(res.data)
+        this.tableData = res.data.data.getOrderList.list
       }, (err) => {
-
       })
     },
     changeOrderType (headItem) {

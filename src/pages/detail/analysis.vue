@@ -120,7 +120,7 @@ import VMulChooser from '../../components/base/multiplyChooser'
 import Dialog from '../../components/base/dialog'
 import BankChooser from '../../components/bankChooser'
 import CheckOrder from '../../components/checkOrder'
-import _ from 'lodash'
+// import _ from 'lodash'
 export default {
   components: {
     VSelection,

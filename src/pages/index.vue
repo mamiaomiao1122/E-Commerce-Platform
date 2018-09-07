@@ -2,24 +2,26 @@
   <div class="index-wrap">
     <div class="index-left">
       <div class="index-left-block">
-        <h2>全部产品</h2>
-        
+        <h2>全部产品</h2>       
         <template v-for="product in productList">
           <h3>{{ product.title}}</h3>
           <ul>
             <li v-for="item in product.list">
               <a :href="item.url">{{ item.name }}</a>
+              <!-- 是否是HOT的标记 -->
               <span v-if="item.hot" class="hot-tag">HOT</span>
             </li>
           </ul>
+          <!-- PC/phone产品之间的横线出现是否 -->
           <div v-if="!product.last" class="hr"></div>
         </template>
       </div>
       <div class="index-left-block lastest-news">
+        <!-- 通过ajax形式请求数据[vue-resource] -->
         <h2>最新消息</h2>
         <ul>
-          <li v-for="item in newsList">
-            <a :href="item.url" class="new-item">{{ item.title }}</a>
+          <li v-for="item in newsList.appData">
+            <a :href="item.url" class="new-item"> {{ item.title }}</a>
           </li>
         </ul>
       </div>
@@ -27,6 +29,9 @@
     <div class="index-right">
       <slide-show :slides="slides" :inv="invTime"></slide-show>
       <div class="index-board-list">
+        <!-- line-last不是最后的会有一个index-board-item:{margin-right:20px}
+        存在的时候为0px；此时用index来绑定这个class;
+        index-board-+变量就是以ID为标志的图片的 -->
         <div
         class="index-board-item"
         v-for="(item, index) in boardList"
@@ -35,6 +40,7 @@
             <h2>{{ item.title }}</h2>
             <p>{{ item.description }}</p>
             <div class="index-board-button">
+              <!-- router-link 实现跳转的形式 -->
               <router-link class="button" :to="{path: 'detail/' + item.toKey}">立即购买</router-link>
             </div>  
           </div>
@@ -50,36 +56,38 @@ export default {
   components: {
     slideShow
   },
-  // created: function () {
-  //   this.$http.get('api/getNewsList')
-  //   .then((res) => {
-  //     this.newsList = res.data
-  //   }, (err) => {
-  //     console.log(err)
-  //   })
-  // },
+  created: function () {
+    //promise对象
+    //使用json server
+    this.$http.get('api/appData')
+    .then((res) => { //请求成功的回调
+      this.newsList = res.data.data
+    }, (err) => {  //请求失败的回调
+      console.log(err)
+    })
+  },
   data () {
     return {
       invTime: 2000,
       slides: [
         {
           src: require('../assets/slideShow/pic1.jpg'),
-          title: 'xxx1',
+          title: 'picture1',
           href: 'detail/analysis'
         },
         {
           src: require('../assets/slideShow/pic2.jpg'),
-          title: 'xxx2',
+          title: 'picture2',
           href: 'detail/count'
         },
         {
           src: require('../assets/slideShow/pic3.jpg'),
-          title: 'xxx3',
-          href: 'http://xxx.xxx.com'
+          title: 'picture3',
+          href: 'detail/publish'
         },
         {
           src: require('../assets/slideShow/pic4.jpg'),
-          title: 'xxx4',
+          title: 'picture4',
           href: 'detail/forecast'
         }
       ],
@@ -120,20 +128,20 @@ export default {
           list: [
             {
               name: '数据统计',
-              url: 'http://starcraft.com'
+              url: 'http://localhost:8080/detail/count'
             },
             {
               name: '数据预测',
-              url: 'http://warcraft.com'
+              url: 'http://localhost:8080/detail/forecast'
             },
             {
               name: '流量分析',
-              url: 'http://overwatch.com',
+              url: 'http://localhost:8080/detail/analysis',
               hot: true
             },
             {
               name: '广告发布',
-              url: 'http://hearstone.com'
+              url: 'http://localhost:8080/detail/publish'
             }
           ]
         },
@@ -142,21 +150,21 @@ export default {
           last: true,
           list: [
             {
-              name: '91助手',
+              name: '微信',
               url: 'http://weixin.com'
             },
             {
-              name: '产品助手',
-              url: 'http://twitter.com',
+              name: '天猫',
+              url: 'http://www.tmall.com',
               hot: true
             },
             {
-              name: '智能地图',
-              url: 'http://maps.com'
+              name: '知乎',
+              url: 'http://zhihu.com'
             },
             {
-              name: '团队语音',
-              url: 'http://phone.com'
+              name: '百度地图',
+              url: 'https://map.baidu.com/'
             }
           ]
         }
