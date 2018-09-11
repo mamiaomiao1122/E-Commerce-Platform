@@ -17,16 +17,14 @@
             <li @click="aboutClick">关于</li>
           </ul>
         </div>  
-      </div>
-		
+      </div>		
 	</div>
 	
 	<div class="container">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
-
-    </div>
+  </div>
 	<div class="app-foot">
       <p>@ 2018 MMM</p>
     </div>
@@ -37,7 +35,6 @@
     <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
       <log-form @has-log="onSuccessLog"></log-form>
     </my-dialog>
-
 
     <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
       <reg-form></reg-form>
@@ -53,8 +50,7 @@
 		components: {
    			 MyDialog: Dialog,
          LogForm,
-         RegForm
-   
+         RegForm   
   		},
 		data(){
 			  return {
