@@ -30,6 +30,7 @@ export default {
   computed: {
     userErrors () {
       let status, errorText
+      //错误提示
       if (!/@/g.test(this.usernameModel)) {
         status = false
         errorText = '必须包含@'
@@ -45,6 +46,7 @@ export default {
     },
     passwordErrors () {
       let status, errorText
+      //验证密码
       if (!/@/g.test(this.usernameModel)) {
         status = false
         errorText = '必须包含@'
