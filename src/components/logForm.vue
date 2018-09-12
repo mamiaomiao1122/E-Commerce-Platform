@@ -57,6 +57,7 @@ export default {
         errorText
       }
     },
+    //错误的信息
     passwordErrors () {
       let errorText, status
       if (!/^\w{1,6}$/g.test(this.passwordModel)) {
