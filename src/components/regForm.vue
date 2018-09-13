@@ -61,7 +61,7 @@ export default {
       }
     }
   },
-  //emit向父组件传递方法
+  //使用$emit向父组件传递方法
   methods: {
     closeMyself () {
       this.$emit('on-close')
