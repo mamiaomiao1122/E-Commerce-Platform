@@ -80,6 +80,7 @@ export default {
     }
   },
   methods: {
+    //登录触发的事件
     onLogin () {
       if (!this.userErrors.status || !this.passwordErrors.status) {
         this.errorText = '部分选项未通过'
