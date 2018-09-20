@@ -16,6 +16,7 @@ export default {
   data () {
     return {
       nowIndex: 0,
+      //数组表示
       banks: [
           {
               id: 201,
