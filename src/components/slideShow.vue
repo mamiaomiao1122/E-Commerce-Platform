@@ -42,6 +42,7 @@ export default {
     }
   },
   computed: {
+    //上一页
     prevIndex () {
       if (this.nowIndex === 0) {
         return this.slides.length - 1
@@ -50,6 +51,7 @@ export default {
         return this.nowIndex - 1
       } 
     },
+    //下一页
     nextIndex () {
       if (this.nowIndex === this.slides.length - 1) {
         return 0
